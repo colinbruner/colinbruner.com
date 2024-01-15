@@ -59,8 +59,8 @@ jobs:
         id: "auth"
         uses: "google-github-actions/auth@v2"
         with:
-          workload_identity_provider: "${{ secret.PROVIDER_NAME }}"
-          service_account: "${{ secret.SA_EMAIL }}"
+          workload_identity_provider: "${{ secrets.PROVIDER_NAME }}"
+          service_account: "${{ secrets.SA_EMAIL }}"
 
       - name: Upload static files to GCS Bucket
         id: "upload-folder"
