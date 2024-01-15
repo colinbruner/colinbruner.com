@@ -60,7 +60,6 @@ jobs:
         run: |
           mkdir public/
           tar xvf artifact.tar -C public/
-          tar xvf
 
       - name: Authenticate to GCP
         id: "auth"
