@@ -73,6 +73,7 @@ jobs:
         uses: "google-github-actions/upload-cloud-storage@v2"
         with:
           path: "public/"
+          parent: false # uploads public/ to root of GCS bucket
           destination: "develop.colinbruner.com/" # TODO: Variable
 
 
