@@ -1,4 +1,4 @@
-name: Deploy static content to Pages
+name: Deploy Static Website to GCS
 
 on:
   # Runs on pushes targeting the default branch
