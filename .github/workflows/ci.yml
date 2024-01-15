@@ -59,7 +59,7 @@ jobs:
       - name: Unpack downloaded assets
         run: |
           mkdir public/
-          tar xvf artifacts.tar -C public/
+          tar xvf artifact.tar -C public/
           tar xvf
 
       - name: Authenticate to GCP
