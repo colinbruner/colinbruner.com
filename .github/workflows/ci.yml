@@ -36,11 +36,11 @@ jobs:
       - run: yarn install
       # Builds ./public/
       - run: yarn build
-      # Upload Artifact
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      # Upload public assets
+      - name: Upload build assets
+        uses: actions/upload-pages-artifact@v3
         with:
-          # Upload public assets
+          name: zola-built-assets
           path: "./public"
 
   deploy:
@@ -49,6 +49,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: zola-built-assets
 
       - name: Check dirs
         run: |
