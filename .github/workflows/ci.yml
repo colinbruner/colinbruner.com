@@ -50,14 +50,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: actions/download-artifact@v4
+      - name: Download Assets from build stage
+        uses: actions/download-artifact@v4
         with:
           name: zola-built-assets
 
-      - name: Check dirs
+        # Yes, I could just combine these 'steps' to make this easier, but I like the segmentation of duty
+      - name: Unpack downloaded assets
         run: |
-          ls -l
-          ls -l public/
+          mkdir public/
+          tar xvf artifacts.tar -C public/
+          tar xvf
 
       - name: Authenticate to GCP
         id: "auth"
