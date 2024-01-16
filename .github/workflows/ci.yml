@@ -74,6 +74,7 @@ jobs:
         with:
           path: "public/"
           parent: false # uploads public/ to root of GCS bucket
+          process_gcloudignore: false # set to false to supress warnings as no gcloudignore file is present
           destination: "develop.colinbruner.com/" # TODO: Variable
 
 
