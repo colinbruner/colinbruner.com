@@ -68,18 +68,13 @@ jobs:
           workload_identity_provider: "${{ secrets.PROVIDER_NAME }}"
           service_account: "${{ secrets.SA_EMAIL }}"
 
-      - name: Upload static files to GCS Bucket
-        id: "upload-folder"
-        uses: "google-github-actions/upload-cloud-storage@v2"
-        with:
-          path: "public/"
-          parent: false # uploads public/ to root of GCS bucket
-          process_gcloudignore: false # set to false to supress warnings as no gcloudignore file is present
-          destination: "develop.colinbruner.com/" # TODO: Variable
+      - name: Set up Cloud '
+        uses: 'google-github-actions/setup-gcloud@v2'
+          with:
+          version: '>= 459.0.0'
 
-
-      #- name: Setup Pages
-      #  uses: actions/configure-pages@v3
-      #- nameee/to/folder: Deploy to GitHub Pages
-      #  id: deployment
-      #  uses: actions/deploy-pages@v2
+        # TODO: Variable for bucket
+      - name: Synchronize public assets to GCS bucket
+        run: |
+            cd public/
+            gcloud storage rsync . gs://develop.colinbruner.com/
