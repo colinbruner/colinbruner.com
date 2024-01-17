@@ -53,13 +53,13 @@ jobs:
           echo "target=$target" >> $GITHUB_OUTPUT
 
       #--minify \
+      #--baseURL $baseURL
       - name: Build Hugo
         run: |
           baseURL="${{ steps.determine_deploy.outputs.base_url }}"
           hugo \
           --ignoreCache --forceSyncStatic \
-          --buildDrafts --gc --logLevel info \
-          --baseURL $baseURL
+          --buildDrafts --gc --logLevel info
 
       - name: Authenticate to GCP
         id: "auth"
