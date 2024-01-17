@@ -5,9 +5,11 @@ This is code checked in for https://colinbruner.com
 ## Development
 
 ```
-$ zola serve
+$ hugo server --disableFastRender
 ```
 
-## Credit
+## Building
 
-The Zola [theme](https://www.getzola.org/themes/blow/) was borrowed from [tchartron](https://github.com/tchartron) and repurposed slightly for me, all credit to him.
+```
+$ hugo --minify
+```

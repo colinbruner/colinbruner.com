@@ -11,55 +11,27 @@ on:
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
-  #pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "zola-deploy"
-  cancel-in-progress: false
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-and-deploy:
+    runs-on: ubuntu-22.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      # Installs Zola - https://www.getzola.org/documentation/getting-started/installation/
-      - uses: taiki-e/install-action@v2
+      - uses: actions/checkout@v4
         with:
-          tool: zola@0.18.0
-      # Setup Node
-      - uses: actions/setup-node@v4
-      # Installs node_modules (tailwind)
-      - run: yarn install
-      # Builds ./public/
-      - run: yarn build
-      # Upload public assets
-      - name: Upload build assets
-        uses: actions/upload-pages-artifact@v3
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
-          name: zola-built-assets
-          path: "./public"
+          hugo-version: "latest"
+          extended: true
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Download Assets from build stage
-        uses: actions/download-artifact@v4
-        with:
-          name: zola-built-assets
-
-        # Yes, I could just combine these 'steps' to make this easier, but I like the segmentation of duty
-      - name: Unpack downloaded assets
-        run: |
-          mkdir public/
-          tar xvf artifact.tar -C public/
+      - name: Build Hugo
+        run: hugo --minify
 
       - name: Authenticate to GCP
         id: "auth"
@@ -68,13 +40,13 @@ jobs:
           workload_identity_provider: "${{ secrets.PROVIDER_NAME }}"
           service_account: "${{ secrets.SA_EMAIL }}"
 
-      - name: Set up Cloud '
-        uses: 'google-github-actions/setup-gcloud@v2'
-          with:
-          version: '>= 459.0.0'
+      - name: Set up Cloud
+        uses: "google-github-actions/setup-gcloud@v2"
+        with:
+          version: ">= 459.0.0"
 
         # TODO: Variable for bucket
       - name: Synchronize public assets to GCS bucket
         run: |
-            cd public/
-            gcloud storage rsync . gs://develop.colinbruner.com/
+          cd public/
+          gcloud storage rsync . gs://develop.colinbruner.com/

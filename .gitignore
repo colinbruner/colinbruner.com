@@ -1,5 +1,8 @@
 node_modules/
 .DS_store
 
+# https://discourse.gohugo.io/t/what-is-the-hugo-build-lock-file/35417 
+.hugo_build.lock
+
 # generated and pushed to gcs
 public/
