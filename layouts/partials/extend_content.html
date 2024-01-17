@@ -1,6 +1,16 @@
 {{ if .Page.Store.Get "hasMermaid" }}
-<script type="module">
+<script data-cfasync="false" type="module">
+  // 'data-cfasync="false"' is required for Cloudflare Pages to work
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true });
+  let theme = localStorage.getItem("pref-theme")
+  mermaid.initialize({ 
+    startOnLoad: true,
+    /*
+      TODO: dynamic reload if theme changes: https://github.com/mermaid-js/mermaid/issues/1945
+      For now this requires a manual page reload if theme changes, which is fine for now.
+    */
+    theme:theme,
+    align:'{{ if site.Params.mermaid.align }}{{ site.Params.mermaid.align }}{{ else }}center{{ end }}',
+  });
 </script>
 {{ end }}

@@ -88,12 +88,6 @@ sequenceDiagram
    cf->>+gce: Registers Node with XML via HTTP POST
 ```
 
----
-
-The above renders a lot better in light mode, give it a shot at the top left of this page.
-
----
-
 ### More Detail
 
 The below is half for my own record to easily remember. For those curious about the details, please read on.
