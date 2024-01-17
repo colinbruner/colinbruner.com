@@ -53,13 +53,13 @@ jobs:
           echo "target=$target" >> $GITHUB_OUTPUT
 
       #--minify \
-      #--baseURL $baseURL
+      # TODO: Only build drafts (-D) when on develop branch
       - name: Build Hugo
         run: |
           baseURL="${{ steps.determine_deploy.outputs.base_url }}"
           hugo \
-          --ignoreCache --forceSyncStatic \
-          --buildDrafts --gc --logLevel info
+          -D --gc --logLevel info \
+          --baseURL $baseURL
 
       - name: Authenticate to GCP
         id: "auth"
