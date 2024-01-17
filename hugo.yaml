@@ -48,8 +48,7 @@ params:
   title: Colin Bruner
   description: "Colin Bruner Homepage"
   keywords: [Blog, Portfolio]
-  author: Colin D. Bruner
-  # author: ["Me", "You"] # multiple authors
+  author: ["Colin Bruner"]
   #images: ["<link or path of image for opengraph, twitter-cards>"]
   DateFormat: "January 1, 1990"
   defaultTheme: light # dark, light
