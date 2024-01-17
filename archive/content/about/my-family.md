@@ -2,6 +2,8 @@
 title = "My Family"
 date = 2024-01-14
 weight = 2
+[extra]
+toc = true
 [taxonomies]
 categories=[]
 tags=[]
@@ -11,7 +13,7 @@ tags=[]
 
 I met my now wife, Reema, during 2019 in Arlington VA. We hit it off immediately and began dating - about a year later the pandemic hit. Thankfully we decided to move in together right as the lock-down was starting. We weathered the worst of it and were officially engaged on November 14th 2020.
 
-## Engagement
+## The Engagement
 
 Over the course of the next few years we learned more about each other, got to travel together to various places, and met all of our each others extended families - while, of course, planning our wedding for May of 2022.
 
