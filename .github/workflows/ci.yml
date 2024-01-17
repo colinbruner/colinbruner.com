@@ -49,4 +49,4 @@ jobs:
       - name: Synchronize public assets to GCS bucket
         run: |
           cd public/
-          gcloud storage rsync . gs://develop.colinbruner.com/
+          gcloud storage rsync . gs://develop.colinbruner.com/ --recursive
