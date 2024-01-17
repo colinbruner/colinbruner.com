@@ -4,5 +4,7 @@ node_modules/
 # https://discourse.gohugo.io/t/what-is-the-hugo-build-lock-file/35417 
 .hugo_build.lock
 
-# generated and pushed to gcs
+# The public directory contains the published website, generated when you run the hugo command
 public/
+# The resources directory contains cached output from Hugo’s asset pipelines, generated when you run the hugo or hugo server commands. 
+resources/

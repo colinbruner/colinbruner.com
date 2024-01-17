@@ -3,10 +3,18 @@ name: Deploy Static Website to GCS
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    paths-ignore:
+      - "LICENSE"
+      - "README.md"
+    branches: ["main", "develop"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      hugoVersion:
+        description: "Hugo Version"
+        required: false
+        default: "latest"
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -21,17 +29,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true # Fetch Hugo themes (true OR recursive)
+          submodules: recursive # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: "latest"
+          hugo-version: "${{ github.event.inputs.hugoVersion }}"
           extended: true
 
+      - name: Determine Hugo BaseURL off build branch
+        id: determine_deploy
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            base_url=colinbruner.com"
+            target="prod"
+          else
+            base_url=develop.colinbruner.com"
+            target="develop"
+          fi
+          echo "Setting BASE_URL to $base_url"
+          echo "base_url=$base_url" >> $GITHUB_OUTPUT
+          echo "target=$target" >> $GITHUB_OUTPUT
+
+      #--minify \
       - name: Build Hugo
-        run: hugo --minify
+        run: |
+          baseURL="${{ steps.determine_deploy.outputs.base_url }}}"
+          hugo \
+          --buildDrafts --gc --verbose \
+          --baseURL $baseURL
 
       - name: Authenticate to GCP
         id: "auth"
@@ -40,13 +67,15 @@ jobs:
           workload_identity_provider: "${{ secrets.PROVIDER_NAME }}"
           service_account: "${{ secrets.SA_EMAIL }}"
 
-      - name: Set up Cloud
-        uses: "google-github-actions/setup-gcloud@v2"
-        with:
-          version: ">= 459.0.0"
+      #- name: Set up Cloud
+      #  uses: "google-github-actions/setup-gcloud@v2"
+      #  with:
+      #    version: ">= 459.0.0"
 
-        # TODO: Variable for bucket
+      # TODO: Variable for bucket
       - name: Synchronize public assets to GCS bucket
         run: |
-          cd public/
-          gcloud storage rsync . gs://develop.colinbruner.com/ --recursive
+          echo hugo deploy --target=${{ steps.determine_deploy.outputs.target }}
+          hugo deploy --target=${{ steps.determine_deploy.outputs.target }}
+          #cd public/
+          #gcloud storage rsync . gs://develop.colinbruner.com/ --recursive

@@ -1,4 +1,4 @@
-baseURL: "https://develop.colinbruner.com/"
+baseURL: "develop.colinbruner.com"
 languageCode: en-us
 title: Colin Bruner
 paginate: 5
@@ -9,7 +9,18 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 
+#TOOD?
 #googleAnalytics: UA-123-45
+
+###
+# Deployment
+###
+deployment:
+  targets:
+    - name: "development" 
+      URL: "gs://develop.colinbruner.com"
+    #- name: "production" 
+    #  URL: "gs://colinbruner.com"
 
 ###
 # NavBar Menu
@@ -28,6 +39,7 @@ menu:
       name: tags
       url: /tags/
       weight: 30
+
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
@@ -79,7 +91,7 @@ params:
     enabled: true # needs to be explicitly set
     title: Colin Bruner
     #subtitle: "Musing about family, life, and things I learn along the way."
-    imageUrl: "img/avatar.jpg"
+    imageUrl: "images/avatar.jpg"
     imageWidth: 120
     imageHeight: 120
     imageTitle: Colin D. Bruner
@@ -88,14 +100,6 @@ params:
     #    url: posts
     #  - name: Tags
     #    url: tags
-
-  ###
-  # home-info mode
-  ###
-  # NOTE: Disabled in favor of profile mode
-  #homeInfoParams:
-  #  Title: "Hi there \U0001F44B"
-  #  Content: Welcome to my blog
 
   socialIcons:
     - name: github
