@@ -55,9 +55,10 @@ jobs:
       #--minify \
       - name: Build Hugo
         run: |
-          baseURL="${{ steps.determine_deploy.outputs.base_url }}}"
+          baseURL="${{ steps.determine_deploy.outputs.base_url }}"
           hugo \
-          --buildDrafts --gc --verbose \
+          --ignoreCache --forceSyncStatic \
+          --buildDrafts --gc --logLevel info \
           --baseURL $baseURL
 
       - name: Authenticate to GCP
