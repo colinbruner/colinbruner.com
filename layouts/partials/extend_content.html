@@ -1,7 +1,11 @@
 {{ if .Page.Store.Get "hasMermaid" }}
-<script data-cfasync="false" type="module">
+<script data-cfasync="false" 
+  type="application/javascript"
+  src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
+></script>
+<script>
   // 'data-cfasync="false"' is required for Cloudflare Pages to work
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  //import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
   let theme = localStorage.getItem("pref-theme")
   mermaid.initialize({ 
     startOnLoad: true,
