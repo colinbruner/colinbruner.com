@@ -42,10 +42,10 @@ jobs:
         id: determine_deploy
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            base_url="colinbruner.com"
+            base_url="//colinbruner.com"
             target="prod"
           else
-            base_url="develop.colinbruner.com"
+            base_url="//develop.colinbruner.com"
             target="develop"
           fi
           echo "Setting BASE_URL to $base_url"
