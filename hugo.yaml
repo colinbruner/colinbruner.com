@@ -17,10 +17,10 @@ buildExpired: false
 ###
 deployment:
   targets:
-    - name: "development" 
+    - name: "develop" 
       URL: "gs://develop.colinbruner.com"
-    #- name: "production" 
-    #  URL: "gs://colinbruner.com"
+    - name: "production" 
+      URL: "gs://colinbruner.com"
 
 ###
 # NavBar Menu
