@@ -6,7 +6,10 @@ on:
     paths-ignore:
       - "LICENSE"
       - "README.md"
-    branches: ["main", "develop"]
+    branches:
+      - main
+      - staging
+      - develop
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -44,6 +47,9 @@ jobs:
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             base_url="//colinbruner.com"
             target="prod"
+          elseif [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
+            base_url="//staging.colinbruner.com"
+            target="staging"
           else
             base_url="//develop.colinbruner.com"
             target="develop"
@@ -56,9 +62,11 @@ jobs:
       # TODO: Only build drafts (-D) when on develop branch
       - name: Build Hugo
         run: |
+          # Ensure there is no public/ directory cached
+          rm -rf public/
           baseURL="${{ steps.determine_deploy.outputs.base_url }}"
           hugo \
-          -D --gc --logLevel info \
+          --gc --logLevel info \
           --baseURL $baseURL
 
       - name: Authenticate to GCP
@@ -76,7 +84,6 @@ jobs:
       # TODO: Variable for bucket
       - name: Synchronize public assets to GCS bucket
         run: |
-          echo hugo deploy --target=${{ steps.determine_deploy.outputs.target }}
           hugo deploy --target=${{ steps.determine_deploy.outputs.target }}
           #cd public/
           #gcloud storage rsync . gs://develop.colinbruner.com/ --recursive
