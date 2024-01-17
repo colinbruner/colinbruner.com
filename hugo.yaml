@@ -23,6 +23,27 @@ deployment:
       URL: "gs://staging.colinbruner.com"
     - name: "develop" 
       URL: "gs://develop.colinbruner.com"
+  matchers:
+    # Cache static assets for 1 year.
+    pattern: "^.+\\.(js|css|svg|ttf)$"
+    #cacheControl: "max-age=31536000, no-transform, public" #TODO: Determine caching timing
+    gzip: true
+
+  matchers:
+    # Cache image assets for 1 year.
+    pattern: "^.+\\.(png|jpg)$"
+    #cacheControl: = "max-age=31536000, no-transform, public" # TODO: Determine caching timing
+    gzip: false
+
+  matchers:
+    # Set custom content type for /sitemap.xml
+    pattern: = "^sitemap\\.xml$"
+    contentType: "application/xml"
+    gzip: true
+
+  matchers:
+    pattern: "^.+\\.(html|xml|json)$"
+    gzip: true
 
 ###
 # NavBar Menu
