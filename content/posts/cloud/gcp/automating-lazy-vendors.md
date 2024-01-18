@@ -8,8 +8,6 @@ showtoc: true
 tocopen: true
 ---
 
-I wanted to write this post for quite sometime and am now finally getting around to it.
-
 I'm going to briefly talk about the process I undertook in migrating an "on prem" video communication vendor from AWS to GCP, as well as how I automated the painful manual parts of scaling the service using events, pubsub, and serverless.
 
 ## The Application
