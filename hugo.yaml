@@ -65,7 +65,7 @@ params:
   keywords: [Blog, Portfolio]
   author: ["Colin Bruner"]
   #images: ["<link or path of image for opengraph, twitter-cards>"]
-  DateFormat: "January 1, 1990"
+  # DateFormat: "January 1, 1990" # NOTE: Seems to be broken
   defaultTheme: light # dark, light
   disableThemeToggle: false
 
