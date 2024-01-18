@@ -63,7 +63,6 @@ jobs:
           echo "base_url=$base_url" >> $GITHUB_OUTPUT
           echo "target=$target" >> $GITHUB_OUTPUT
 
-      #--minify \
       # TODO: Only build drafts (-D) when on develop branch
       - name: Build Hugo
         run: |
@@ -71,6 +70,7 @@ jobs:
           rm -rf public/
           baseURL="${{ steps.determine_deploy.outputs.base_url }}"
           hugo \
+          --minify \
           --gc --logLevel info \
           --baseURL $baseURL
 

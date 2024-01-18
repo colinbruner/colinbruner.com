@@ -24,19 +24,15 @@ deployment:
     - name: "develop" 
       URL: "gs://develop.colinbruner.com"
   matchers:
-    - pattern: "^.+\\.(js|css|svg|ttf)$"
-      # 31536000 1 year.
-      cacheControl: "max-age=6000, public"
+    - pattern: ^.*\.(js|css|svg|ttf)$
+      # 31536000 == 1 year.
+      cacheControl: "max-age=31536000, public"
       gzip: true
-    - pattern: "^.+\\.(png|jpg)$"
-      # 31536000 1 year.
-      cacheControl: = "max-age=6000, public"
+    - pattern: ^.*\.(png|jpg)$
+      # 31536000 == 1 year.
+      cacheControl: = "max-age=31536000, public"
       gzip: false
-      # Set custom content type for /sitemap.xml
-    - pattern: = "^sitemap\\.xml$"
-      contentType: "application/xml"
-      gzip: true
-    - pattern: "^.+\\.(html|xml|json)$"
+    - pattern: ^.*\.(html|xml|json)$
       gzip: true
 
 ###
