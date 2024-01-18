@@ -24,12 +24,13 @@ deployment:
     - name: "develop" 
       URL: "gs://develop.colinbruner.com"
   matchers:
-      # Cache static assets for 1 year.
     - pattern: "^.+\\.(js|css|svg|ttf)$"
-      #cacheControl: "max-age=31536000, no-transform, public" #TODO: Determine caching timing
+      # 31536000 1 year.
+      cacheControl: "max-age=6000, public"
       gzip: true
     - pattern: "^.+\\.(png|jpg)$"
-      #cacheControl: = "max-age=31536000, no-transform, public" # TODO: Determine caching timing
+      # 31536000 1 year.
+      cacheControl: = "max-age=6000, public"
       gzip: false
       # Set custom content type for /sitemap.xml
     - pattern: = "^sitemap\\.xml$"
