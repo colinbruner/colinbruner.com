@@ -79,6 +79,7 @@ params:
   UseHugoToc: true
   disableSpecial1stPost: false
   disableScrollToTop: false
+  poweredByFooter: false # NOTE: Added to my fork only
   comments: false
   hidemeta: false
   hideSummary: false
