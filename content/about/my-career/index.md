@@ -1,7 +1,7 @@
 ---
 author: ["Colin Bruner"]
 title: "My Career"
-date: 2024-01-14
+date: 2014-05-12
 weight: 10
 categories: []
 ShowToc: true

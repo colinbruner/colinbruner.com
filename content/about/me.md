@@ -1,7 +1,7 @@
 ---
 author: ["Colin Bruner"]
 title: "Colin Bruner"
-date: 2024-01-14
+date: 1990-01-26
 weight: 1
 categories: []
 ShowToc: true
