@@ -6,7 +6,10 @@ on:
     paths-ignore:
       - "LICENSE"
       - "README.md"
-    branches: ["main", "develop"]
+    branches:
+      - main
+      - staging
+      - develop
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -38,26 +41,42 @@ jobs:
           hugo-version: "${{ github.event.inputs.hugoVersion }}"
           extended: true
 
+      - name: debug submodule
+        run: |
+          ls -l themes/PaperMod/layouts/partials
+          cat themes/PaperMod/layouts/_default/single.html
+
       - name: Determine Hugo BaseURL off build branch
         id: determine_deploy
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            base_url=colinbruner.com"
+            base_url="//colinbruner.com"
             target="prod"
+            extra_hugo_switches=""
+          elif [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
+            base_url="//staging.colinbruner.com"
+            target="staging"
+            extra_hugo_switches=""
           else
-            base_url=develop.colinbruner.com"
+            base_url="//develop.colinbruner.com"
             target="develop"
+            extra_hugo_switches="--buildDrafts"
           fi
           echo "Setting BASE_URL to $base_url"
           echo "base_url=$base_url" >> $GITHUB_OUTPUT
           echo "target=$target" >> $GITHUB_OUTPUT
+          echo "extra_hugo_switches=$extra_hugo_switches" >> $GITHUB_OUTPUT
 
-      #--minify \
+      # TODO: Only build drafts (-D) when on develop branch
       - name: Build Hugo
         run: |
-          baseURL="${{ steps.determine_deploy.outputs.base_url }}}"
+          # Ensure there is no public/ directory cached
+          rm -rf public/
+          baseURL="${{ steps.determine_deploy.outputs.base_url }}"
           hugo \
-          --buildDrafts --gc --verbose \
+          --minify \
+          --gc --logLevel info \
+          ${{ steps.determine_deploy.outputs.extra_hugo_switches }} \
           --baseURL $baseURL
 
       - name: Authenticate to GCP
@@ -75,7 +94,6 @@ jobs:
       # TODO: Variable for bucket
       - name: Synchronize public assets to GCS bucket
         run: |
-          echo hugo deploy --target=${{ steps.determine_deploy.outputs.target }}
           hugo deploy --target=${{ steps.determine_deploy.outputs.target }}
           #cd public/
           #gcloud storage rsync . gs://develop.colinbruner.com/ --recursive

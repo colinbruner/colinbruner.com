@@ -1,4 +1,4 @@
-baseURL: "develop.colinbruner.com"
+baseURL: "//develop.colinbruner.com"
 languageCode: en-us
 title: Colin Bruner
 paginate: 5
@@ -17,10 +17,23 @@ buildExpired: false
 ###
 deployment:
   targets:
-    - name: "development" 
+    - name: "production"
+      URL: "gs://colinbruner.com"
+    - name: "staging"
+      URL: "gs://staging.colinbruner.com"
+    - name: "develop"
       URL: "gs://develop.colinbruner.com"
-    #- name: "production" 
-    #  URL: "gs://colinbruner.com"
+  matchers:
+    - pattern: ^.*\.(js|css|svg|ttf)$
+      # 31536000 == 1 year.
+      cacheControl: "max-age=31536000, public"
+      gzip: true
+    - pattern: ^.*\.(png|jpg)$
+      # 31536000 == 1 year.
+      cacheControl: = "max-age=31536000, public"
+      gzip: false
+    - pattern: ^.*\.(html|xml|json)$
+      gzip: true
 
 ###
 # NavBar Menu
@@ -40,16 +53,14 @@ menu:
       url: /tags/
       weight: 30
 
-
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: Colin Bruner
   description: "Colin Bruner Homepage"
   keywords: [Blog, Portfolio]
-  author: Colin D. Bruner
-  # author: ["Me", "You"] # multiple authors
+  author: ["Colin Bruner"]
   #images: ["<link or path of image for opengraph, twitter-cards>"]
-  DateFormat: "January 1, 1990"
+  # DateFormat: "January 1, 1990" # NOTE: Seems to be broken
   defaultTheme: light # dark, light
   disableThemeToggle: false
 
@@ -63,6 +74,7 @@ params:
   UseHugoToc: true
   disableSpecial1stPost: false
   disableScrollToTop: false
+  poweredByFooter: false # NOTE: Added to my fork only
   comments: false
   hidemeta: false
   hideSummary: false
@@ -71,18 +83,17 @@ params:
 
   # TODO
   assets:
-    # disableHLJS: true # to disable highlight.js
-    # disableFingerprinting: true
-    favicon: "<link / abs url>"
-    favicon16x16: "<link / abs url>"
-    favicon32x32: "<link / abs url>"
-    apple_touch_icon: "<link / abs url>"
-    safari_pinned_tab: "<link / abs url>"
+    #  disableFingerprinting: true
+    favicon: "favicon/favicon.ico"
+    favicon16x16: "favicon/favicon-16x16.png"
+    favicon32x32: "favicon/favicon-32x32.png"
+    apple_touch_icon: "favicon/apple-touch-icon.png"
+    safari_pinned_tab: "favicon/apple-touch-icon.png"
 
   label:
     text: "Home"
-    icon: /apple-touch-icon.png
-    iconHeight: 35
+    #icon: /favicon/apple-touch-icon.png
+    #iconHeight: 35
 
   ###
   # profile-mode
@@ -108,6 +119,8 @@ params:
       url: "https://mastodon.social/@colinbruner"
     - name: linkedin
       url: "https://www.linkedin.com/in/colin-bruner-b1361484/"
+    - name: resume
+      url: "/resume/resume.pdf"
     - name: email
       url: "hello@colinbruner.com"
 

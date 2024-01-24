@@ -1,7 +1,7 @@
 ---
 author: ["Colin Bruner"]
 title: "Colin Bruner"
-date: 2024-01-14
+date: 1990-01-26
 weight: 1
 categories: []
 ShowToc: true
@@ -11,9 +11,9 @@ disableShare: true
 
 Welcome! My name is Colin Bruner and this is my blog.
 
-I've decided to set up this up as a way to kill some time, document my experiences, and share some personal thoughts.
+I've decided to set up this up as a way to kill some time, document my experiences, and share some of my personal thoughts.
 
-Please feel free to take a look if you’d like, maybe you’ll find something interesting.
+Please feel free to take a look if you’d like, maybe you’ll find something interesting to you.
 
 ## Contact
 

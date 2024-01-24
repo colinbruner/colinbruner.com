@@ -1,0 +1,4 @@
+# Ref my own upstream pending merge of https://github.com/adityatelange/hugo-PaperMod/pull/1356
+[submodule "themes/PaperMod"]
+	path = themes/PaperMod
+	url = https://github.com/colinbruner/hugo-PaperMod.git
