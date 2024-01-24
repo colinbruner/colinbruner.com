@@ -3,7 +3,6 @@ author: ["Colin Bruner"]
 title: "Automating Lazy Vendors"
 date: 2023-04-29
 tags: ["gcp", "cloud", "serverless", "pub/sub"]
-#categories: []
 showtoc: true
 tocopen: true
 ---
