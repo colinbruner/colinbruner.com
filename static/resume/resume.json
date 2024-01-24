@@ -1,0 +1,84 @@
+
+{
+  "name": "Colin Bruner",
+  "titles": "Cloud Architect / Platform Engineer",
+  "slogan": "focused on automation, self-healing, distributed services at global scale, and optimization",
+  "contact": {
+    "email": "jobs@colinbruner.com",
+    "site": "https://colinbruner.com"
+  },
+  "languages": [
+    "python", "bash", "javascript", "golang"
+  ],
+  "certifications": [
+    "AWS Certified Solutions Architect Associate SAA-C02",
+    "Azure Fundamentals AZ-900",
+    "Docker Certified Associate - DCA",
+    "RedHat Certified Systems Administrator - RHCSA (160-041-406)",
+    "SaltStack Certified Engineer - SSCE (DB9468F1)"
+  ],
+  "skills": [
+    [
+      "GCP", 
+      "AWS", 
+      "Terraform", 
+      "Vault", 
+      "Consul", 
+      "Nomad", 
+      "Ansible", 
+      "CI/CD", 
+      "Containers", 
+      "Kubernetes"
+    ]
+  ],
+  "experience": [
+    {
+      "ID.me": { 
+        "tenure": "2019 - Present",
+        "tasks": [
+          "Developed a custom platform built on HashiCorp Nomad Enterprise that integrated Consul Enterprise and Vault Enterprise to securely orchestrate production workloads",
+          "TODO"
+        ]
+      }
+    },
+    {
+      "Verisign - SRE IV": {
+        "title": "Site Reliability Engineer IV",
+        "tenure": "September 2019 - November 2020",
+        "location":"Reston, VA / Remote",
+        "tasks": [
+          "Extended control of our Edge services through event driven infrastructure using SaltStack and an automated GitOps development process",
+          "Developed an internal web application written in Python (Flask), used as a frontend to our CMDB and as a tool for operating Edge Sites",
+          "Led teams at remote data centers across Asia, Europe, and North America as part of Verisign's Global Edge Site build out initiative",
+          "Built and maintained Jenkins pipelines responsible for firmware patching physical machines, rebuilding virtual machines via kickstarts, application install & validation, and load testing.",
+          "Advise developers on best practices in deploying code, patching systems, and intelligently monitoring services."
+        ]
+      }
+    },
+    {
+      "Verisign - SRE I, II, III": {
+        "title": "Site Reliability Engineer I, II, III",
+        "tenure": "April 2016 - September 2019",
+        "location": "Reston, VA",
+        "tasks": [
+          "Responsible for deploying, conﬁguring, and operating Verisign's Edge systems serving global DNS root zone (.), TLD's ( .com, .net, .gov), and various other products running on RHEL/FreeBSD",
+          "Supported globally distributed applications handling 3 million queries per second to critical internet services, such as dot com/net resolution",
+          "Contributed to improving build automation through development and creation of internal tooling and scripts.",
+          "Configured alerts for systems using Telegraf, Splunk, and Nagios."
+        ]
+      }
+    },
+    {
+      "Folio Investing" : {
+        "title": "Junior UNIX Admin",
+        "tenure": "April 2014 - April 2016",
+        "location": "Tysons Corner, VA",
+        "tasks" : [
+          "Administered Solaris 10/11, CentOS/RHEL 6/7, and Ubuntu 14.04/12.04",
+          "Deployed Puppet infrastructure to automate manual tasks on a fleet of approximately 50 servers across multiple operating systems",
+          "Built a Python Flask app used as a frontend to facilitate and streamline the request process for new user accounts or current user changes"
+        ]
+      }
+    }
+  ]
+}

@@ -2,6 +2,7 @@
 author: ["Colin Bruner"]
 title: "My Family"
 date: 2019-04-01
+draft: true
 weight: 2
 categories: []
 ShowToc: true

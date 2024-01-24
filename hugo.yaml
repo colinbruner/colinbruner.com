@@ -119,6 +119,8 @@ params:
       url: "https://mastodon.social/@colinbruner"
     - name: linkedin
       url: "https://www.linkedin.com/in/colin-bruner-b1361484/"
+    - name: resume
+      url: "/resume/resume.pdf"
     - name: email
       url: "hello@colinbruner.com"
 
