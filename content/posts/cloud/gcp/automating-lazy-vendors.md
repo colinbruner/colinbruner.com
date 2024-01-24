@@ -120,7 +120,7 @@ protoPayload.resourceName=~"projects/my-project-123/zones/us-east1-[a-z]/instanc
 
 In the field piece of the query, `protoPayload.resourceName`, I'm filtering out GCE instances using regex on the name of the GCE instance being created.
 
-### In Conclusion
+## In Conclusion
 
 This is one part of a two part process, with its mirror being "deregistration" of GCE instances with the Manager when a GCE instance is terminated.. however, I won't cover that here.
 

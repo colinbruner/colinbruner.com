@@ -52,18 +52,21 @@ jobs:
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             base_url="//colinbruner.com"
             target="prod"
+            extra_hugo_switches=""
           elif [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
             base_url="//staging.colinbruner.com"
             target="staging"
+            extra_hugo_switches=""
           else
             base_url="//develop.colinbruner.com"
             target="develop"
+            extra_hugo_switches="--buildDrafts"
           fi
           echo "Setting BASE_URL to $base_url"
           echo "base_url=$base_url" >> $GITHUB_OUTPUT
           echo "target=$target" >> $GITHUB_OUTPUT
+          echo "extra_hugo_switches=$extra_hugo_switches" >> $GITHUB_OUTPUT
 
-      #--minify \
       # TODO: Only build drafts (-D) when on develop branch
       - name: Build Hugo
         run: |
@@ -71,7 +74,9 @@ jobs:
           rm -rf public/
           baseURL="${{ steps.determine_deploy.outputs.base_url }}"
           hugo \
+          --minify \
           --gc --logLevel info \
+          ${{ steps.determine_deploy.outputs.extra_hugo_switches }} \
           --baseURL $baseURL
 
       - name: Authenticate to GCP

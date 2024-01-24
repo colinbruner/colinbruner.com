@@ -17,26 +17,22 @@ buildExpired: false
 ###
 deployment:
   targets:
-    - name: "production" 
+    - name: "production"
       URL: "gs://colinbruner.com"
-    - name: "staging" 
+    - name: "staging"
       URL: "gs://staging.colinbruner.com"
-    - name: "develop" 
+    - name: "develop"
       URL: "gs://develop.colinbruner.com"
   matchers:
-    - pattern: "^.+\\.(js|css|svg|ttf)$"
-      # 31536000 1 year.
-      cacheControl: "max-age=6000, public"
+    - pattern: ^.*\.(js|css|svg|ttf)$
+      # 31536000 == 1 year.
+      cacheControl: "max-age=31536000, public"
       gzip: true
-    - pattern: "^.+\\.(png|jpg)$"
-      # 31536000 1 year.
-      cacheControl: = "max-age=6000, public"
+    - pattern: ^.*\.(png|jpg)$
+      # 31536000 == 1 year.
+      cacheControl: = "max-age=31536000, public"
       gzip: false
-      # Set custom content type for /sitemap.xml
-    - pattern: = "^sitemap\\.xml$"
-      contentType: "application/xml"
-      gzip: true
-    - pattern: "^.+\\.(html|xml|json)$"
+    - pattern: ^.*\.(html|xml|json)$
       gzip: true
 
 ###
@@ -56,7 +52,6 @@ menu:
       name: tags
       url: /tags/
       weight: 30
-
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
@@ -87,19 +82,18 @@ params:
   tocopen: false
 
   # TODO
-  #assets:
-  #  # disableHLJS: true # to disable highlight.js
-  #  # disableFingerprinting: true
-  #  favicon: "<link / abs url>"
-  #  favicon16x16: "<link / abs url>"
-  #  favicon32x32: "<link / abs url>"
-  #  apple_touch_icon: "<link / abs url>"
-  #  safari_pinned_tab: "<link / abs url>"
+  assets:
+    #  disableFingerprinting: true
+    favicon: "favicon/favicon.ico"
+    favicon16x16: "favicon/favicon-16x16.png"
+    favicon32x32: "favicon/favicon-32x32.png"
+    apple_touch_icon: "favicon/apple-touch-icon.png"
+    safari_pinned_tab: "favicon/apple-touch-icon.png"
 
   label:
     text: "Home"
-    icon: /apple-touch-icon.png
-    iconHeight: 35
+    #icon: /favicon/apple-touch-icon.png
+    #iconHeight: 35
 
   ###
   # profile-mode
@@ -125,6 +119,8 @@ params:
       url: "https://mastodon.social/@colinbruner"
     - name: linkedin
       url: "https://www.linkedin.com/in/colin-bruner-b1361484/"
+    - name: resume
+      url: "/resume/resume.pdf"
     - name: email
       url: "hello@colinbruner.com"
 

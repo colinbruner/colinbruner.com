@@ -1,3 +1,7 @@
 User-agent: *
+{{ if eq .Site.BaseURL "//colinbruner.com" -}}
 Disallow: /about/
+{{- else -}}
+Disallow: /
+{{- end }}
 Sitemap: https:{{ .Site.BaseURL }}/sitemap.xml
