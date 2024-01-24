@@ -3,30 +3,33 @@ author: ["Colin Bruner"]
 title: "Automating Lazy Vendors"
 date: 2023-04-29
 tags: ["gcp", "cloud", "serverless", "pub/sub"]
-#categories: []
 showtoc: true
 tocopen: true
 ---
 
-I'm going to briefly talk about the process I undertook in migrating an "on prem" video communication vendor from AWS to GCP, as well as how I automated the painful manual parts of scaling the service using events, pubsub, and serverless.
+I'm going to briefly talk about the process I undertook in migrating an "on prem" video communication vendor from AWS to GCP. In addition, I automated the painful manual parts of scaling the service using event triggers, pubsub, and serverless technologies.
 
 ## The Application
 
-The application hosts video communication software, think Zoom, that connects customers and employees. The software is delivered as a [tar][tar] file which they provide as input to build an ElasticCompute 2 (EC2) or Google Compute Engine (GCE) image (read: a Virtual Machine (VM) image).
+The application hosts video communication software that connects customers and employees, like Zoom but worse.
+
+The software is delivered as a [tar][tar] file which they provide as input to build an Elastic Compute (EC2) or Google Compute Engine (GCE) image (read: a Virtual Machine (VM) image).
 
 The app is comprised of the following components:
 
-- Proxy nodes: Most be publicly routable, they proxy connections on multiple ports to Transcoder nodes.
-- Transcoder nodes: Compute heavy, these nodes handle the call transcoding.
-- Manager node: A single node (no HA) that handles scheduling calls and common administrative tasks.
+- Proxy nodes: Must be publicly routable, they forward connections to Transcoder nodes
+- Transcoder nodes: Heavy compute nodes - they handle the video calls
+- Manager node: A single node that handles scheduling calls and administrative tasks
 
-All of these are VM appliances packaged as tar files by the software provider.
+All of these are VM "appliances" packaged as tar files by the software provider.
 
 ### Enrollment
 
-Once the Manager node is bootstrapped, a manual process that I won’t dive into here, Proxy and Transcoder nodes can be provisioned. The `manual` provisioning steps looks something like this:
+Once the Manager node is bootstrapped, a tedious process that I won’t dive into here, Proxy and Transcoder nodes can be provisioned.
 
-1. Within the Manager GUI create the configuration entry form for the node to be provisioned
+The manual provisioning steps look something like this:
+
+1. Within the Manager GUI, fill out the configuration form for the node to be provisioned
    - This contains attributes such as, `hostname`, `ip-address`, `node-type`, etc
 2. The form generates an XML file containing the configuration of the node being provisioned
 3. The XML file must then to be sent over the network via an HTTP POST to the new node, on port `8443`
