@@ -51,7 +51,7 @@ jobs:
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             base_url="//colinbruner.com"
-            target="prod"
+            target="production"
             extra_hugo_switches=""
           elif [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
             base_url="//staging.colinbruner.com"
