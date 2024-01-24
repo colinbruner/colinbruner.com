@@ -7,6 +7,8 @@ showtoc: true
 tocopen: true
 ---
 
+## Background
+
 When I was working with Verisign, we would (typically) name our remote edge sites based on the closest airport code in the area. So the schema would look something like this,
 
 ```
