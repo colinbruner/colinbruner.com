@@ -50,15 +50,15 @@ jobs:
         id: determine_deploy
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            base_url="//colinbruner.com"
+            base_url="https://colinbruner.com"
             target="production"
             extra_hugo_switches=""
           elif [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
-            base_url="//staging.colinbruner.com"
+            base_url="https://staging.colinbruner.com/"
             target="staging"
             extra_hugo_switches=""
           else
-            base_url="//develop.colinbruner.com"
+            base_url="https://develop.colinbruner.com/"
             target="develop"
             extra_hugo_switches="--buildDrafts"
           fi
