@@ -33,7 +33,7 @@ deployment:
       cacheControl: = "max-age=31536000, public"
       gzip: false
     - pattern: ^.*\.(html|xml|json)$
-      cacheControl: = "max-age=300, public"
+      #cacheControl: = "max-age=300, public" # NOTE: Doesn't appear to take
       gzip: true
 
 ###
