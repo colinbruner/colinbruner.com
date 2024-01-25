@@ -1,4 +1,4 @@
-baseURL: "//develop.colinbruner.com"
+baseURL: "https://develop.colinbruner.com"
 languageCode: en-us
 title: Colin Bruner
 paginate: 5
