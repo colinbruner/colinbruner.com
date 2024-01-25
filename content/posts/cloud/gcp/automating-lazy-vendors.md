@@ -44,21 +44,21 @@ The core components in both AWS and GCP are the same. The technology simply uses
 
 ### Old - AWS
 
-The original AWS infrastructure was setup manually and rather quickly, without a lot of understanding about how the application works.
+The original AWS infrastructure was set up manually and rather quickly without a lot of understanding about how the application works.
 
-Because of the requirements of the application, and due to how AWS EC2 handles NUMA vCPUs the AWS EC2 instances actually had to be deployed onto dedicated hosts to avoid any potential issues with other VM guests on the shared physical (server) resources.
+Because of the requirements of the application and due to how AWS EC2 handles NUMA vCPUs, the AWS EC2 instances actually had to be deployed onto dedicated hosts to avoid any potential issues with other VM guests on the shared physical server resources.
 
 ### New - GCP
 
-I created the GCP infrastructure fully in Terraform; primarily comprised of Managed Instance Groups (MIGS) running Google Compute Engine Instances (GCE).
+I created the GCP infrastructure fully in Terraform. It is primarily comprised of Managed Instance Groups (MIGs) running Google Compute Engine (GCE) Instances.
 
-Very simple. The more exciting piece was the use of Google Cloud Platform's EventArc service to automatically react to published events, (think a GCE instance starts) and react to them using Serverless hooks.
+Very simple. The more exciting piece was the use of Google Cloud Platform's EventArc service to automatically react to published events (think a GCE instance start events) and react to them using Serverless hooks.
 
 ## Automation
 
 Recall the manual setup process discussed in the [Enrollment](#enrollment) section. After the Proxy or Conference node is brought online, they need to be "enrolled" with the Manager.
 
-This allows the Manager to generate the XML file and provide it back to the Proxy or Conference node so that it knows its own configurations and ultimately, what to connect to.
+This allows the Manager to generate the XML file and provide it back to the Proxy or Conference node so that it knows its own configurations and ultimately what to connect to.
 
 ### Driving Action with Events
 
@@ -94,25 +94,25 @@ sequenceDiagram
 The below is half for my own record to easily remember. For those curious about the details, please read on.
 
 1. GCE Instance added to GCE MIG
-   - Triggers `compute.instances.insert` Audit Event
-1. GCP [Log Router Sink][sink] captures `compute.instances.insert` message
-   - Publishes these events to a Pub/Sub topic as JSON, with useful details like project, ID of GCE Instance, etc
+   - Triggers the `compute.instances.insert` Audit Event
+1. GCP [Log Router Sink][sink] captures the `compute.instances.insert` event message
+   - Publishes these events to a Pub/Sub topic as JSON with useful details like ID of GCE Instance, project ID, etc
 1. The Pub/Sub topic is subscribed to by a Cloud Function
-1. The Cloud Function interacts with GCP’s APIs to query information about the ID of the GCE Instance in Pub/Sub topic
-   - Retrieve information such as IP, Gateway, Hostname, Metadata
-   - Metadata is used to determine what type of node this is, Transcoder or Proxy?
+1. The Cloud Function interacts with GCP’s APIs to query information about the ID of the GCE Instance retrieved from Pub/Sub message
+   - Retrieve information such as IP, Gateway, Hostname, Metadata, etc
+   - Metadata is used to determine what type of node this is: Transcoder or Proxy
 1. The Cloud Function sends the data via HTTP POST to the Manager
    - This creates the initial configuration entry with the Manager
-   - This returns an XML binary data
-1. The Cloud Function sends an HTTP POST request GCE Instance that was just added, on port 8443.
-   - The code making the request is configured to retry with incremental backoffs for up to 10minutes
-   - This is due to the whole process so far described happening very quickly
+   - This returns XML binary data
+1. The Cloud Function sends an HTTP POST request to the GCE Instance that was just added on port 8443
+   - The code making the request is configured to retry with incremental backoffs for up to 10 minutes
+   - This is due to the whole process thus far described happening very quickly; the GCE Instance may not have opened port 8443 quick enough to receive the initial POST sent by Cloud Function
 1. The GCE Instance (eventually) returns success
-   - The node appears within the Manager’s GUI and begins to fully synchronize its configurations.
+   - The node appears within the Manager’s GUI and begins to fully synchronize its configurations
 
 #### Example Log Router Query
 
-My goal is to make the explaination of this as straight forward as possible. To further that purpose, the Log Router Sink query might look something like this:
+My goal is to make the explanation of this as straight forward as possible. To further that purpose, the Log Router Sink query (mentioned above) might look something like this:
 
 ```
 log_name="projects/my-project-755/logs/cloudaudit.googleapis.com%2Factivity"
@@ -121,13 +121,13 @@ protoPayload.methodName="v1.compute.instances.insert"
 protoPayload.resourceName=~"projects/my-project-123/zones/us-east1-[a-z]/instances/vendor-(proxy|transcoder)-.*"
 ```
 
-In the field piece of the query, `protoPayload.resourceName`, I'm filtering out GCE instances using regex on the name of the GCE instance being created.
+In the field piece of the query, `protoPayload.resourceName`, I'm filtering out GCE Instances using regex on the name of the GCE Instance being created.
 
 ## In Conclusion
 
-This is one part of a two part process, with its mirror being "deregistration" of GCE instances with the Manager when a GCE instance is terminated.. however, I won't cover that here.
+This is one part of a two part process. The opposite of registration (this) is the "deregistration" of those GCE Instances with the Manager whenever a GCE Instance is terminated... however, I won't cover that here.
 
-Stringing together all of these inputs and outputs was really interesting - as my first foray into working with GCP services, it was really pleasant.
+Stringing together all of these inputs and outputs was really interesting! As my first foray into working with GCP services, it was overall painless.
 
 [tar]: https://en.wikipedia.org/wiki/Tar_(computing)
 [sink]: https://cloud.google.com/logging/docs/routing/overview#sinks
