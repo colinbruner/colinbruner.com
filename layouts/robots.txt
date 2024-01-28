@@ -1,5 +1,5 @@
 User-agent: *
-{{ if eq .Site.BaseURL "//colinbruner.com" -}}
+{{ if eq .Site.BaseURL "https://colinbruner.com" -}}
 Disallow: /about/
 {{- else -}}
 Disallow: /
