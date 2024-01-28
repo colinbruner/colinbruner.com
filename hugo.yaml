@@ -24,6 +24,7 @@ deployment:
     - name: "develop"
       URL: "gs://develop.colinbruner.com"
   matchers:
+      # gcloud storage objects update --cache-control="max-age=300, public" 'gs://colinbruner.com/**'
     - pattern: ^.*\.(js|css|svg|ttf)$
       # Caching handled at the CDN level.
       cacheControl: = "max-age=300, public"

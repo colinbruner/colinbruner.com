@@ -4,4 +4,4 @@ Disallow: /about/
 {{- else -}}
 Disallow: /
 {{- end }}
-Sitemap: https:{{ .Site.BaseURL }}/sitemap.xml
+Sitemap: {{ .Site.BaseURL }}/sitemap.xml
