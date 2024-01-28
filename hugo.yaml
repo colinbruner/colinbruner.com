@@ -25,15 +25,16 @@ deployment:
       URL: "gs://develop.colinbruner.com"
   matchers:
     - pattern: ^.*\.(js|css|svg|ttf)$
-      # 31536000 == 1 year.
-      #cacheControl: "max-age=31536000, public"
+      # Caching handled at the CDN level.
+      cacheControl: = "max-age=300, public"
       gzip: true
     - pattern: ^.*\.(png|jpg)$
-      # 31536000 == 1 year.
-      cacheControl: = "max-age=31536000, public"
+      # Caching handled at the CDN level.
+      cacheControl: = "max-age=300, public"
       gzip: false
     - pattern: ^.*\.(html|xml|json)$
-      #cacheControl: = "max-age=300, public" # NOTE: Doesn't appear to take
+      # Caching handled at the CDN level.
+      cacheControl: = "max-age=300, public" # NOTE: Doesn't appear to take
       gzip: true
 
 ###
