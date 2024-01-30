@@ -22,8 +22,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+        # Only OPEN a PR if one does not already exist
+      - name: Get State of Current Branch
+        id: get-state
+        run: |
+          currentBranchState=$(gh pr status -q '.currentBranch.state' --json state)
+          echo "currentBranchState=${currentBranchState}" >> "$GITHUB_OUTPUT"
+
       - name: Create PR to Promote 'develop' to 'staging'
-        if: github.ref == 'refs/heads/develop'
+        if: github.ref == 'refs/heads/develop' && steps.get-state.outputs.currentBranchState != 'OPEN'
         run: |
           gh pr create \
             --title "Promote Develop to Staging" \
@@ -31,7 +38,7 @@ jobs:
             --base staging
 
       - name: Create PR to Promote 'staging' to 'production'
-        if: github.ref == 'refs/heads/staging'
+        if: github.ref == 'refs/heads/staging' && steps.get-state.outputs.currentBranchState != 'OPEN'
         run: |
           gh pr create \
             --title "Promote Staging to Production" \
