@@ -19,7 +19,7 @@ jobs:
   create-pr:
     runs-on: ubuntu-22.04
     env:
-      GH_TOKEN: ${{ github.token }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -28,7 +28,7 @@ jobs:
         run: |
           gh pr create \
             --title "Promote Develop to Staging" \
-            --body "This is an automated process" \
+            --body "This PR is automatically created and left open until ready to be merged" \
             --base staging
 
       - name: Create PR to Promote 'staging' to 'production'
@@ -36,5 +36,5 @@ jobs:
         run: |
           gh pr create \
             --title "Promote Staging to Production" \
-            --body "This is an automated process" \
+            --body "This PR is automatically created and left open until ready to be merged" \
             --base main
