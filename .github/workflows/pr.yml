@@ -27,6 +27,7 @@ jobs:
         id: get-state
         run: |
           currentBranchState=$(gh pr status -q '.currentBranch.state' --json state)
+          echo "Current PR Status of Branch is: ${currentBranchState}"
           echo "currentBranchState=${currentBranchState}" >> "$GITHUB_OUTPUT"
 
       - name: Create PR to Promote 'develop' to 'staging'
