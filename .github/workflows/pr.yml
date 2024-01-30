@@ -3,9 +3,6 @@ name: Create PR for Environment Promotion
 on:
   # Runs on pushes targeting the default branch
   push:
-    paths-ignore:
-      - "LICENSE"
-      - "README.md"
     branches:
       - staging
       - develop
