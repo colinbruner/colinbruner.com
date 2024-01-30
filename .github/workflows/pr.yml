@@ -12,8 +12,9 @@ permissions:
   contents: read
   id-token: write
 
-#env:
-#  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# Used by steps to create a pull request
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   create-pr:
@@ -24,7 +25,6 @@ jobs:
       - name: Create PR to Promote 'develop' to 'staging'
         if: github.ref == 'refs/heads/develop'
         run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
           gh pr create \
             --title "Promote Develop to Staging" \
             --body "This PR is automatically created and left open until ready to be merged" \
