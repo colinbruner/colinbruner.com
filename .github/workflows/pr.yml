@@ -1,0 +1,38 @@
+name: Create PR for Environment Promotion
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    paths-ignore:
+      - "LICENSE"
+      - "README.md"
+    branches:
+      - staging
+      - develop
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create PR to Promote 'develop' to 'staging'
+        if: github.ref == 'refs/heads/develop'
+        run: |
+          gh create pr \
+            --title "Promote Develop to Staging" \
+            --body "This is an automated process" \
+            --base staging
+
+      - name: Create PR to Promote 'staging' to 'production'
+        if: github.ref == 'refs/heads/staging'
+        run: |
+          gh create pr \
+            --title "Promote Staging to Production" \
+            --body "This is an automated process" \
+            --base main

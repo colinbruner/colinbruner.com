@@ -41,11 +41,6 @@ jobs:
           hugo-version: "${{ github.event.inputs.hugoVersion }}"
           extended: true
 
-      - name: debug submodule
-        run: |
-          ls -l themes/PaperMod/layouts/partials
-          cat themes/PaperMod/layouts/_default/single.html
-
       - name: Determine Hugo BaseURL off build branch
         id: determine_deploy
         run: |
