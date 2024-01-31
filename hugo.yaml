@@ -125,7 +125,7 @@ params:
     - name: resume
       url: "/resume/resume.pdf"
     - name: email
-      url: "hello@colinbruner.com"
+      url: "mailto:hello@colinbruner.com"
 
   # TODO
   analytics:
