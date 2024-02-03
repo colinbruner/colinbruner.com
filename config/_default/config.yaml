@@ -9,8 +9,10 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 
-#TOOD?
-#googleAnalytics: UA-123-45
+# NOTE: Only enabled in production
+services:
+  googleAnalytics:
+    ID: G-9NDEV1T1YB
 
 ###
 # Deployment
@@ -57,7 +59,6 @@ menu:
       weight: 30
 
 params:
-  env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: Colin Bruner
   description: "Colin Bruner Homepage"
   keywords: [Blog, Portfolio]
@@ -84,7 +85,6 @@ params:
   showtoc: false
   tocopen: false
 
-  # TODO
   assets:
     #  disableFingerprinting: true
     favicon: "favicon/favicon.ico"
@@ -103,7 +103,7 @@ params:
   ###
   profileMode:
     enabled: true # needs to be explicitly set
-    title: Colin Bruner
+    #title: Colin Bruner
     #subtitle: "Musing about family, life, and things I learn along the way."
     imageUrl: "images/avatar.jpg"
     imageWidth: 120
@@ -128,11 +128,11 @@ params:
       url: "mailto:hello@colinbruner.com"
 
   # TODO
-  analytics:
-    #google:
-    #  SiteVerificationTag: "XYZabc"
-    #bing:
-    #  SiteVerificationTag: "XYZabc"
+  #analytics:
+  #  google:
+  #    SiteVerificationTag: "XYZabc"
+  #  bing:
+  #    SiteVerificationTag: "XYZabc"
 
   cover:
     hidden: true # hide everywhere but not in structured data
