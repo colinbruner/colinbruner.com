@@ -1,4 +1,4 @@
 #!/bin/bash
 
 #hugo server --disableFastRender
-hugo server
+hugo server -e develop --disableFastRender

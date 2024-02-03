@@ -48,32 +48,32 @@ jobs:
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             base_url="https://colinbruner.com"
             target="production"
-            extra_hugo_switches=""
+            hugo_env="production"
           elif [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
             base_url="https://staging.colinbruner.com"
             target="staging"
-            extra_hugo_switches=""
+            hugo_env="staging"
           else
             base_url="https://develop.colinbruner.com"
             target="develop"
-            extra_hugo_switches="--buildDrafts"
+            hugo_env="develop"
           fi
           echo "Setting BASE_URL to $base_url"
           echo "base_url=$base_url" >> $GITHUB_OUTPUT
           echo "target=$target" >> $GITHUB_OUTPUT
-          echo "extra_hugo_switches=$extra_hugo_switches" >> $GITHUB_OUTPUT
+          echo "hugo_env=$hugo_env" >> $GITHUB_OUTPUT
 
-      # TODO: Only build drafts (-D) when on develop branch
+      # TODO: Convert to ./scripts/build.sh
       - name: Build Hugo
         run: |
           # Ensure there is no public/ directory cached
           rm -rf public/
           baseURL="${{ steps.determine_deploy.outputs.base_url }}"
           hugo \
-          --minify \
-          --gc --logLevel info \
-          ${{ steps.determine_deploy.outputs.extra_hugo_switches }} \
-          --baseURL $baseURL
+            --minify \
+            --gc --logLevel info \
+            -e ${{ steps.determine_deploy.outputs.hugo_env }} \
+            --baseURL $baseURL
 
       - name: Authenticate to GCP
         id: "auth"
