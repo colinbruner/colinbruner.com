@@ -68,12 +68,10 @@ jobs:
         run: |
           # Ensure there is no public/ directory cached
           rm -rf public/
-          baseURL="${{ steps.determine_deploy.outputs.base_url }}"
-          hugo \
-            --minify \
-            --gc --logLevel info \
-            -e ${{ steps.determine_deploy.outputs.hugo_env }} \
-            --baseURL $baseURL
+          export baseURL="${{ steps.determine_deploy.outputs.base_url }}"
+          export hugoEnv="${{ steps.determine_deploy.outputs.hugo_env }}"
+          # Build based upon two envars exported above
+          ./scripts/build.sh
 
       - name: Authenticate to GCP
         id: "auth"
