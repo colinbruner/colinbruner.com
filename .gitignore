@@ -8,3 +8,6 @@ node_modules/
 public/
 # The resources directory contains cached output from Hugo’s asset pipelines, generated when you run the hugo or hugo server commands. 
 resources/
+
+# Ignore Obsidian MD local configuration directory
+**.obsidian

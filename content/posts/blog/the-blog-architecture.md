@@ -81,12 +81,32 @@ This allows me to fully test the integration of what I'm working on behind Cloud
 
 ### Build and Deploy
 
-I've created a GitHub Actions workflow file named [ci.yml][ci.yml]
+I've created a GitHub Actions workflow file named [ci.yml][ci.yml] that handles the building and deployment process with a few easy steps.
+1. Download Hugo - this is necessary as this code is running generic on GitHub Actions "runners"
+2. Determine Environment - this checks the current branch reference of the committed code
+3. Build Hugo - with variables from the previous step in place we build our static site
+4. Authenticate to GCP - this is using GCP OIDC provider defined [here][oidc]
+5. Deploy Hugo - using Hugo Deploy, synchronize locally built public assets to GCS bucket
+
+That's it. Once authentication and the GCS bucket are setup, its really pretty simple. Hugo even provides a built-in integration with GCS bucket static sites through the `hugo deploy` subcommand. These settings can be easily tweaked per-environment as well.
 
 ### Create PR
 
-TODO Discuss Create PR workflow
+A very simple GitHub Actions workflow file named [pr.yml][pr.yml] will handle the PR creation / promotion process across my environment lifecycle.
 
+Consider the following:
+```
+# develop.colinbruner.com
+1. branch: develop -> staging
+
+# staging.colinbruner.com
+2. branch: staging -> main
+
+# colinbruner.com
+3. branch: main
+```
+
+Develop changes get merged into staging and staging into main. The the pr.yml workflow assists in this. On commit to `develop` I'll look to see if an open PR exists from `develop` -> `staging` - if it doesn't, the workflow will create one. Likewise from `staging` -> `main`.
 ## Conclusion
 
 TODO
@@ -98,3 +118,5 @@ TODO
 [hugoOmit]: https://gohugo.io/getting-started/configuration/#omit-the-root-key
 [gha]: https://github.com/features/actions
 [ci.yml]: https://github.com/colinbruner/colinbruner.com/blob/main/.github/workflows/ci.yml
+[pr.yml]: https://github.com/colinbruner/colinbruner.com/blob/main/.github/workflows/pr.yml
+[oidc]:  https://github.com/colinbruner/terarform-gcp-infra/blob/main/colinbruner.com/auth.tf)
