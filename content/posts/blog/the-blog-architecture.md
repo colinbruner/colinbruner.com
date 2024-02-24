@@ -9,7 +9,7 @@ showtoc: true
 tocopen: true
 ---
 
-The following post is talking about this website from a technical point-of-view. The website is a static site deployed to GCP behind Cloud Flare, creative - I know.
+The following post is talking about this website from a technical point-of-view. The website is a static site deployed to GCP behind Cloudflare, creative - I know.
 
 Really, there isn't anything blazingly cutting edge and original about this blog - is anything [really original][orig] anyway?
 
@@ -17,9 +17,9 @@ What is unique about this blog is that its mine and I set it up in a way that ma
 
 ## Domain & Network
 
-Both my domain and web application firewall (WAF) are provided by CloudFlare.
+Both my domain and web application firewall (WAF) are provided by Cloudflare.
 
-I've always liked CloudFlare.
+I've always liked Cloudflare.
 
 They offer a lot of really good (free) options for DNS, caching, etc. The user experience, reliable DNS updates, and fast network provides an easy choice.
 
@@ -75,9 +75,9 @@ Before talking more about GitHub Actions, I need to discuss how I've structured 
 - staging
 - main
 
-I "map" these branches to [configurations](#hugo-environment-configs) I use to differentiate stages or deployments of my home page.
+I map these branches to [configurations](#hugo-environment-configs) I use to differentiate stages or deployments of my home page.
 
-This allows me to fully test the integration of what I'm working on behind CloudFlare while being served as static content by GCS. This can make **a lot** of difference as sometimes localhost doesn't always cut it.
+This allows me to fully test the integration of what I'm working on behind Cloudflare while being served as static content by GCS. This can make **a lot** of difference as sometimes localhost doesn't always cut it.
 
 ### Build and Deploy
 
@@ -108,8 +108,12 @@ Consider the following:
 
 Develop changes get merged into staging and staging into main. The the pr.yml workflow assists in this. On commit to `develop` I'll look to see if an open PR exists from `develop` -> `staging` - if it doesn't, the workflow will create one. Likewise from `staging` -> `main`.
 ## Conclusion
-
-TODO
+While there is a level of technical know-how required in setting up a little blog like this - there is really almost no cost.
+- Cloudflare: Free
+- GitHub: Free
+- GitHub Actions (CI/CD): Free
+- Google Cloud Storage: pennies a month
+With caching enabled in Cloudflare the incoming traffic cost to GCS is reduced that much more. Technically, you could probably switch out GCS for something like GitHub Pages or another free static site hosting alternative!
 
 [orig]: https://www.goodreads.com/quotes/131591-nothing-is-original-steal-from-anywhere-that-resonates-with-inspiration
 [tgi]: https://github.com/colinbruner/terarform-gcp-infra
