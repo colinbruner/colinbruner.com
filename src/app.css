@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		color-scheme: dark;
+	}
+
+	html {
+		font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	html.dark {
+		color-scheme: dark;
+	}
+
+	html:not(.dark) {
+		color-scheme: light;
+	}
+
+	* {
+		border-color: theme('colors.slate.200');
+	}
+
+	html.dark * {
+		border-color: theme('colors.slate.800');
+	}
+}
+
+@layer components {
+	/* Shiki dual-theme support */
+	.shiki,
+	.shiki span {
+		color: var(--shiki-dark) !important;
+		background-color: var(--shiki-dark-bg) !important;
+	}
+
+	html:not(.dark) .shiki,
+	html:not(.dark) .shiki span {
+		color: var(--shiki-light) !important;
+		background-color: var(--shiki-light-bg) !important;
+	}
+
+	/* Code block wrapper */
+	.prose pre.shiki {
+		@apply rounded-lg overflow-x-auto text-sm leading-relaxed;
+		padding: 1rem 1.25rem;
+	}
+
+	/* Mermaid diagram styling */
+	.mermaid {
+		@apply flex justify-center py-6;
+	}
+
+	.mermaid svg {
+		max-width: 100%;
+		height: auto;
+	}
+
+	/* Scroll bar styling */
+	::-webkit-scrollbar {
+		width: 6px;
+		height: 6px;
+	}
+
+	::-webkit-scrollbar-track {
+		@apply bg-transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		@apply bg-slate-300 dark:bg-slate-700 rounded-full;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		@apply bg-slate-400 dark:bg-slate-600;
+	}
+}
+
+@layer utilities {
+	.text-balance {
+		text-wrap: balance;
+	}
+}
