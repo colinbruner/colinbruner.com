@@ -12,6 +12,7 @@
 	];
 
 	const certifications = [
+		{ name: 'GCP Professional Cloud Architect', href: 'https://www.credly.com/badges/b3458027-796a-4c4a-8f86-3f1d4baaa6bf' },
 		{ name: 'AWS Solutions Architect – Associate', file: '/certificates/aws-solutions-architect-associate.pdf' },
 		{ name: 'Docker Certified Associate', file: '/certificates/docker-certified-associate.pdf' },
 		{ name: 'RHCSA 7', href: 'https://rhtapps.redhat.com/verify?certId=160-041-406' }
