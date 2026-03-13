@@ -63,43 +63,92 @@
 			<h2
 				class="text-sm font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-5"
 			>
-				Background
+				My Background
 			</h2>
 
 			<div class="space-y-6">
 				<div class="pl-4 border-l-2 border-indigo-500/30 dark:border-indigo-500/20">
-					<p class="font-semibold text-slate-800 dark:text-slate-200 text-sm mb-0.5">
+					<p class="text-xs font-medium text-indigo-400 dark:text-indigo-500 uppercase tracking-wider mb-0.5">
+						The Start
+					</p>
+					<p class="font-semibold text-slate-800 dark:text-slate-200 text-sm mb-1">
+						Folin Financial <span class="font-normal text-slate-400 dark:text-slate-500">(acquired by Goldman Sachs)</span>
+					</p>
+					<p class="text-sm">
+						Everyone has to start somewhere. Mine was a financial back-office role that turned into an unexpected
+						doorway into technology. I taught myself enough to earn a seat at the table as a Junior UNIX
+						Administrator — and never looked back. It's where I discovered a genuine love for automation and
+						the satisfaction of making systems do the work for you. Solaris, Red Hat Linux, and a healthy
+						respect for production environments were the early building blocks.
+					</p>
+				</div>
+
+				<div class="pl-4 border-l-2 border-indigo-500/30 dark:border-indigo-500/20">
+					<p class="text-xs font-medium text-indigo-400 dark:text-indigo-500 uppercase tracking-wider mb-0.5">
+						The Foundation
+					</p>
+					<p class="font-semibold text-slate-800 dark:text-slate-200 text-sm mb-1">
+						Verisign — Resolution Operations
+					</p>
+					<p class="text-sm">
+						If you've ever typed a <code class="text-xs">.com</code> or <code class="text-xs">.net</code>
+						address into a browser, there's a good chance my work was involved. At Verisign I helped operate
+						two of the 13 global root nameservers — a.root and j.root — and the DNS resolution infrastructure
+						handling roughly 3 million queries per second worldwide. This is where I learned what it truly
+						means to build and run reliable systems at scale. I also had the privilege of traveling the globe
+						— London, Amsterdam, Tokyo, Frankfurt, and beyond — standing up datacenters and keeping the
+						internet's critical infrastructure humming. It gave me a deep, firsthand understanding of how
+						things actually work beneath the surface.
+					</p>
+				</div>
+
+				<div class="pl-4 border-l-2 border-indigo-500/30 dark:border-indigo-500/20">
+					<p class="text-xs font-medium text-indigo-400 dark:text-indigo-500 uppercase tracking-wider mb-0.5">
+						The Expansion
+					</p>
+					<p class="font-semibold text-slate-800 dark:text-slate-200 text-sm mb-1">
 						ID.me
 					</p>
 					<p class="text-sm">
-						Platform engineering focused on cloud infrastructure modernization. Led GCP
-						migration from AWS, built event-driven automation using GCP EventArc, Pub/Sub,
-						and Cloud Functions. Deep work with HashiCorp tooling (Terraform, Vault,
-						Consul) and AWS infrastructure at scale.
+						ID.me is where I made the leap into cloud-native engineering at scale. I joined a fast-moving
+						platform team and quickly found myself deep in the work of modernizing infrastructure — leading
+						a full migration from AWS to GCP, building event-driven automation pipelines using EventArc,
+						Pub/Sub, and Cloud Functions, and going deep on HashiCorp's ecosystem with Terraform, Vault, and
+						Consul. Kubernetes stopped being a buzzword and became the daily reality. Just as importantly,
+						this role gave me a broader view of what it takes to run a technology organization — the people,
+						the processes, and the tradeoffs that never show up in documentation.
 					</p>
 				</div>
 
 				<div class="pl-4 border-l-2 border-indigo-500/30 dark:border-indigo-500/20">
-					<p class="font-semibold text-slate-800 dark:text-slate-200 text-sm mb-0.5">
-						Verisign — Resolution Operations
+					<p class="text-xs font-medium text-indigo-400 dark:text-indigo-500 uppercase tracking-wider mb-0.5">
+						The Pivot
 					</p>
-					<p class="text-sm mb-2">
-						Managed critical internet infrastructure — two of the 13 global root nameservers
-						(a.root and j.root) and DNS resolution for <code class="text-xs">.com</code> and
-						<code class="text-xs">.net</code> at roughly 3 million queries per second worldwide.
-						Traveled extensively for global datacenter operations across London, Amsterdam,
-						Tokyo, Frankfurt, and more.
-					</p>
-				</div>
-
-				<div class="pl-4 border-l-2 border-indigo-500/30 dark:border-indigo-500/20">
-					<p class="font-semibold text-slate-800 dark:text-slate-200 text-sm mb-0.5">
-						FolioFN
+					<p class="font-semibold text-slate-800 dark:text-slate-200 text-sm mb-1">
+						CME Group
 					</p>
 					<p class="text-sm">
-						First engineering role, transitioning from financial back-office to Junior UNIX
-						Administrator. Gained hands-on experience with Solaris and Red Hat Linux systems,
-						earning RHCSA 7 certification.
+						CME Group was a deliberate pivot — a return to the financial sector and a sharpening of focus.
+						With GCP as the sole cloud platform, I was able to go deeper rather than wider, building
+						expertise and earning the GCP Professional Cloud Architect certification along the way. Working
+						within a highly regulated, operationally rigorous environment reinforced the discipline that
+						large-scale financial infrastructure demands.
+					</p>
+				</div>
+
+				<div class="pl-4 border-l-2 border-indigo-500/30 dark:border-indigo-500/20">
+					<p class="text-xs font-medium text-indigo-400 dark:text-indigo-500 uppercase tracking-wider mb-0.5">
+						The Mastering
+					</p>
+					<p class="font-semibold text-slate-800 dark:text-slate-200 text-sm mb-1">
+						Wells Fargo
+					</p>
+					<p class="text-sm">
+						Today I'm a Principal Engineer at Wells Fargo, leading a team focused on modernizing one of the
+						largest financial institutions in the world. The work centers on what I've always loved most —
+						automation and integration through APIs — applied at a scale that genuinely matters. We're
+						building the connective tissue that lets a complex, decades-old organization move faster and more
+						reliably. It's the kind of challenge that draws on everything that came before it.
 					</p>
 				</div>
 
