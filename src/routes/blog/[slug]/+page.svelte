@@ -56,7 +56,7 @@
 		class="prose dark:prose-invert prose-slate prose-a:no-underline hover:prose-a:underline prose-code:before:content-none prose-code:after:content-none max-w-none"
 	>
 		{#if PostContent}
-			<svelte:component this={PostContent} />
+			<PostContent />
 		{:else}
 			<p>Loading post content...</p>
 		{/if}
