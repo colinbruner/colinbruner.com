@@ -1,13 +1,14 @@
 node_modules/
 .DS_store
 
-# https://discourse.gohugo.io/t/what-is-the-hugo-build-lock-file/35417 
+# Hugo
 .hugo_build.lock
-
-# The public directory contains the published website, generated when you run the hugo command
 public/
-# The resources directory contains cached output from Hugo’s asset pipelines, generated when you run the hugo or hugo server commands. 
 resources/
+
+# SvelteKit
+.svelte-kit/
+build/
 
 # Ignore Obsidian MD local configuration directory
 **.obsidian
