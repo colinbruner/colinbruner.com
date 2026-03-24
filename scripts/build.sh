@@ -1,13 +1,8 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
+set -euo pipefail
 
-hugoEnv=${hugoEnv:-"devel"}
-baseURL=${baseURL:-"https://develop.colinbruner.com"}
-
-echo "[Info]: Building site for environment: '$hugoEnv' with baseURL: '$baseURL'"
-
-hugo \
-    --minify \
-    --gc \
-    --logLevel info \
-    -e $hugoEnv \
-    --baseURL $baseURL
+# SvelteKit build script
+echo "[Info]: Building SvelteKit site..."
+npm ci
+npm run build
+echo "[Info]: Build complete. Output in build/"
