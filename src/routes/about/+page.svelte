@@ -257,7 +257,7 @@
 					Email me
 				</a>
 				<a
-					href="/resume/resume.pdf"
+					href="/resume"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-sm font-medium transition-colors"
