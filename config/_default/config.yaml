@@ -21,8 +21,6 @@ deployment:
   targets:
     - name: "production"
       URL: "gs://colinbruner.com"
-    - name: "staging"
-      URL: "gs://staging.colinbruner.com"
     - name: "develop"
       URL: "gs://develop.colinbruner.com"
   matchers:

@@ -7,7 +7,6 @@ on:
       - "README.md"
     branches:
       - main
-      - staging
       - develop
 
   workflow_dispatch:
@@ -40,10 +39,6 @@ jobs:
             base_url="https://colinbruner.com"
             target="production"
             bucket="gs://colinbruner.com"
-          elif [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
-            base_url="https://staging.colinbruner.com"
-            target="staging"
-            bucket="gs://staging.colinbruner.com"
           else
             base_url="https://develop.colinbruner.com"
             target="develop"

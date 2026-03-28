@@ -1,10 +1,8 @@
 name: Create PR for Environment Promotion
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches:
-      - staging
       - develop
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
@@ -30,18 +28,10 @@ jobs:
           echo "Current PR Status of Branch is: ${currentBranchState}"
           echo "currentBranchState=${currentBranchState}" >> "$GITHUB_OUTPUT"
 
-      - name: Create PR to Promote 'develop' to 'staging'
+      - name: Create PR to Promote 'develop' to 'main'
         if: github.ref == 'refs/heads/develop' && steps.get-state.outputs.currentBranchState != 'OPEN'
         run: |
           gh pr create \
-            --title "Promote Develop to Staging" \
-            --body "This PR is automatically created and left open until ready to be merged" \
-            --base staging
-
-      - name: Create PR to Promote 'staging' to 'production'
-        if: github.ref == 'refs/heads/staging' && steps.get-state.outputs.currentBranchState != 'OPEN'
-        run: |
-          gh pr create \
-            --title "Promote Staging to Production" \
+            --title "Promote Develop to Main" \
             --body "This PR is automatically created and left open until ready to be merged" \
             --base main

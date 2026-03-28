@@ -61,11 +61,10 @@ GitHub Actions handles build and deploy. The workflow:
 
 ```
 develop  → develop.colinbruner.com  (gs://develop.colinbruner.com)
-staging  → staging.colinbruner.com  (gs://staging.colinbruner.com)
 main     → colinbruner.com          (gs://colinbruner.com)
 ```
 
-A separate workflow handles automatic PR creation to promote changes from `develop → staging → main`.
+A separate workflow handles automatic PR creation to promote changes from `develop → main`.
 
 ## Cost
 
